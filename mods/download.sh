@@ -3,7 +3,7 @@
 set -e
 
 download(){
- wget -N --continue -P./binaries/ $*
+ wget -N --continue -P../binaries/ $*
 }
 
 echo "Downloading binaries..."
@@ -16,7 +16,7 @@ echo "Downloading kernel 4.1 (ARM)..."
 download https://github.com/firmadyne/kernel-v4.1/releases/download/v1.1/zImage.armel
 
 echo "NOT downloading the old console or libnvram release binaries"
-echo "Its best to build them with the ./build_imgs.sh script"
+echo "Its best to build them with the ./build_sub_bins.sh script"
 return
 
 #these don't get executed

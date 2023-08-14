@@ -1,0 +1,49 @@
+CFLAGS=-O2 -fPIC -Wall
+LDFLAGS=-shared -nostdlib
+SOURCES=nvram.c
+OBJECTS=$(SOURCES:.c=.o)
+TARGET=libnvram
+
+# List of architectures
+ARCHITECTURES=armel mipsel mipsbe
+# Set the default compiler
+CC=gcc
+
+#### Set compiler and flags for different architectures ####
+
+# sudo apt install gcc-arm-linux-gnueabi
+ifeq ($(ARCH), armel)
+    CC=arm-linux-gnueabi-gcc
+    CFLAGS+=-march=armv7-a
+endif
+# sudo apt install gcc-mipsel-linux-gnu
+ifeq ($(ARCH), mipsel)
+    CC=mipsel-linux-gnu-gcc
+    CFLAGS+=-EL
+endif
+# sudo apt install gcc-mipsel-linux-gnu
+ifeq ($(ARCH), mipsbe)
+    CC=mips-linux-gnu-gcc
+    CFLAGS+=-EB
+endif
+
+all: $(SOURCES) $(TARGET)
+
+$(TARGET): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@_$(ARCH).so
+
+.c.o:
+	$(CC) -c $(CFLAGS) $< -o $@
+
+# Compile all architectures
+all_arch:
+	$(foreach arch,$(ARCHITECTURES),$(MAKE) clean_o; $(MAKE) ARCH=$(arch);)
+	$(MAKE) clean_o
+
+clean_o:
+	rm -f *.o
+
+clean_so:
+	rm -f *.so
+
+.PHONY: all_arch clean_o clean_so

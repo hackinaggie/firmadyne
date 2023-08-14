@@ -28,15 +28,15 @@ sudo pip install git+https://github.com/sviehb/jefferson
 sudo service postgresql start
 sudo -u postgres createuser firmadyne
 sudo -u postgres createdb -O firmadyne firmware
-sudo -u postgres psql -d firmware < ./firmadyne/database/schema
+sudo -u postgres psql -d firmware < ../database/schema
 echo "ALTER USER firmadyne PASSWORD 'firmadyne'" | sudo -u postgres psql
 
 # Set up firmadyne
 pushd firmadyne
-./download.sh
+/download.sh
 
 # Set FIRMWARE_DIR in firmadyne.config
-mv firmadyne.config firmadyne.config.orig
+mv ../firmadyne.config firmadyne.config.orig
 echo -e '#!/bin/sh' "\nFIRMWARE_DIR=$(pwd)/" > firmadyne.config
 cat firmadyne.config.orig >> firmadyne.config
 
