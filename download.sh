@@ -15,6 +15,11 @@ download https://github.com/firmadyne/kernel-v2.6/releases/download/v1.1/vmlinux
 echo "Downloading kernel 4.1 (ARM)..."
 download https://github.com/firmadyne/kernel-v4.1/releases/download/v1.1/zImage.armel
 
+echo "NOT downloading the old console or libnvram release binaries"
+echo "Its best to build them with the ./build_imgs.sh script"
+return
+
+#these don't get executed
 echo "Downloading console..."
 download https://github.com/firmadyne/console/releases/download/v1.0/console.armel
 download https://github.com/firmadyne/console/releases/download/v1.0/console.mipseb
