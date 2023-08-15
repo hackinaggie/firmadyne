@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Exit immediately on error
 set -e
+# Treat unset variables and parameters other than the special parameters "@" and "*"  as  an error when performing parameter expansion
 set -u
+# print commands as they execute; uncomment for verbose
+# set -x
 
 if [ -e ./firmadyne.config ]; then
     source ./firmadyne.config

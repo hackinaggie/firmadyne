@@ -30,7 +30,7 @@ endif
 all: $(SOURCES) $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@_$(ARCH)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@.$(ARCH)
 
 .c.o:
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -44,6 +44,6 @@ clean_o:
 	rm -f *.o
 
 clean_bin:
-	rm f console_*
+	rm f console.*
 
 .PHONY: all_arch clean_o clean_bin

@@ -18,7 +18,7 @@ build_cp(){
 
     cd "$SRC_DIR/$1/"
     make all_arch
-    mv "$1_"* $BINARY_DIR
+    mv $(find . -executable -name $1'*') $BINARY_DIR
     cd -
     echo ""
 }
